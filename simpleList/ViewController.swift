@@ -28,14 +28,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "1번째 공간"
+        } else {
+            return "2번째 공간"
+        }
+    }
+    
+    
     // UITableViewControl 클릭 소스
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("section = \(indexPath.section) row = \(indexPath.row)")
-        print(datas[indexPath.row])
-        print(subdatas[indexPath.row])
         let myAlert = UIAlertController(title: "동물들", message: "동물에 대해 알아봅시다.", preferredStyle: .alert)
         
-        let choose = UIAlertAction(title: ("section = \(indexPath.section) row = \(indexPath.row)"), style: .default, handler:{ (action:UIAlertAction) ->Void in self.view.backgroundColor = UIColor.red})
+        let choose = UIAlertAction(title: ("공간 = \(indexPath.section)번째 줄 = \(indexPath.row) 번째"), style: .default, handler:{ (action:UIAlertAction) ->Void in self.view.backgroundColor = UIColor.red})
         
         let ok = UIAlertAction(title: "확인", style: .default, handler: {(myAction: UIAlertAction) -> Void in self.view.backgroundColor = UIColor.black
         })
@@ -66,6 +77,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
     }
     
 }
