@@ -24,9 +24,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    // UITableViewDataSoure
+    // UITableViewDataSoure 필수 소스(반드시 포함되어야만 한다.)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datas.count
+    }
+    // UITableViewControl 클릭 소스
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print("section = \(indexPath.section) row = \(indexPath.row)")
+        print(datas[indexPath.row])
+        print(subdatas[indexPath.row])
+        let myAlert = UIAlertController(title: "동물들", message: "동물에 대해 알아봅시다.", preferredStyle: .alert)
+        
+        let choose = UIAlertAction(title: ("section = \(indexPath.section) row = \(indexPath.row)"), style: .default, handler:{ (action:UIAlertAction) ->Void in self.view.backgroundColor = UIColor.red})
+        
+        let ok = UIAlertAction(title: "확인", style: .default, handler: {(myAction: UIAlertAction) -> Void in self.view.backgroundColor = UIColor.black
+        })
+        
+        let delete = UIAlertAction(title: "삭제", style: .default, handler: {(myAction: UIAlertAction) -> Void in self.view.backgroundColor = UIColor.green
+        })
+
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: {(myAction: UIAlertAction) -> Void in self.view.backgroundColor = UIColor.cyan
+        })
+        
+        myAlert.addAction(choose)
+        myAlert.addAction(ok)
+        myAlert.addAction(cancelAction)
+        myAlert.addAction(delete)
+        present(myAlert, animated: true, completion: nil)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
